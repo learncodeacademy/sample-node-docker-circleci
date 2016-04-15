@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t willrstern/sample-node .
+
+test:
+  override:
+    - docker run willrstern/sample-node npm test
