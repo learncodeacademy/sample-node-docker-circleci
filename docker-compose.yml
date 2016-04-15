@@ -1,0 +1,35 @@
+version: "2"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: node_modules/.bin/nodemon server.js
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 80:3000
+  mysql:
+    image: mysql:5.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+    ports:
+      - 3306:3306
+  migrations:
+    image: willrstern/test-db-migrations
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mysql
+  fixtures:
+    image: willrstern/test-db-fixtures:latest
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mysql
