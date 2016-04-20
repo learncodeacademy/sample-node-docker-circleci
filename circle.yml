@@ -4,8 +4,8 @@ machine:
 
 dependencies:
   override:
-    - if [[ "$$CIRCLE_BRANCH" == staging ]]; then export BUILT=true && docker build -f Dockerfile.staging -t willrstern/sample-node .; fi;
-    - if [[ "$$CIRCLE_BRANCH" == qa ]]; then export BUILT=true && docker build -f Dockerfile.qa -t willrstern/sample-node .; fi;
+    - if [[ "$CIRCLE_BRANCH" == staging ]]; then export BUILT=true && docker build -f Dockerfile.staging -t willrstern/sample-node .; fi;
+    - if [[ "$CIRCLE_BRANCH" == qa ]]; then export BUILT=true && docker build -f Dockerfile.qa -t willrstern/sample-node .; fi;
     - if [[ "$BUILT" != true ]]; then docker build -t willrstern/sample-node .; fi;
 
 test:
