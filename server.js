@@ -1,5 +1,3 @@
-var config = require("./config");
-var db = require("knex")(config);
 var express = require("express");
 
 express()

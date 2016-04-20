@@ -2,6 +2,10 @@ FROM mhart/alpine-node:5.6.0
 
 EXPOSE 3000
 ENV NODE_ENV development
+ENV DB_NAME test
+ENV DB_HOST mysql
+ENV DB_USER test
+ENV DB_PASSWORD test
 RUN mkdir /app
 WORKDIR /app
 
