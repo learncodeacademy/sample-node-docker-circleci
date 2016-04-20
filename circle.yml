@@ -6,7 +6,7 @@ dependencies:
   override:
     - if [[ "$CIRCLE_BRANCH" == staging ]]; then docker build -f Dockerfile.staging -t willrstern/sample-node .; fi;
     - if [[ "$CIRCLE_BRANCH" == qa ]]; then docker build -f Dockerfile.qa -t willrstern/sample-node .; fi;
-    - if [[ "$CIRCLE_BRANCH" != staging ]] && [[ "$CIRCLE_BRANCH" != qa ]]; then docker build -t willrstern/sample-node .; fi;
+    - if [[ "$CIRCLE_BRANCH" != qa ]] && [[ "$CIRCLE_BRANCH" != staging ]]; then docker build -t willrstern/sample-node .; fi;
 
 test:
   override:
@@ -18,7 +18,6 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - ./deploy.sh
-
   staging:
     branch: staging
     commands:
